@@ -36,3 +36,4 @@ def message(data):
     requests.post(url, data=params)
   else:
     requests.post(url, data={ "chat_id": chat_id, "text": data })
+  return "True"
