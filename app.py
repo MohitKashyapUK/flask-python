@@ -11,7 +11,7 @@ def handler_telegram():
   # import "./bot-handler/telegram"
   import requests
   url = "https://sk-results.000webhostapp.com/do.php"
-  params = { "data": request.json }
+  params = { "data": request.get_data() }
   requests.get(url, params)
   return "True"
 
