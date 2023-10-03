@@ -33,7 +33,9 @@ def message(data):
         ]
       ]
     }
-    requests.post(url, data=params)
+    resp = requests.post(url, data=params)
+    print(resp.text)
   else:
-    requests.post(url, data={ "chat_id": chat_id, "text": data })
+    resp = requests.post(url, data={ "chat_id": chat_id, "text": data })
+    print(resp.text)
   return "True"
