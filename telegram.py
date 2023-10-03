@@ -1,10 +1,10 @@
 def message(data):
   from pytube import YouTube, extract
   import os, json, requests
-  Message = data.message
-  message_id = Message.message_id
-  chat_id = Message.from.id
-  text = Message.text
+  Message = data["message"]
+  message_id = Message["message_id"]
+  chat_id = Message["from"]["id"]
+  text = Message["text"]
   bot_api = "https://api.telegram.org"
   bot_token = os.environ.get("bot_token")
   method = "sendMessage"
