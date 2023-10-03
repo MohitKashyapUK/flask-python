@@ -19,12 +19,13 @@ def handler_telegram():
   if data:
     local = locals()
     for key in data: local[key] = data[key]
-    if local.get("message"): telegram.message(data)
-    elif local.get("callback_query"): telegram.callback_query(data)
-    else: return "This method is not allowed!"
+    if local.get("message"):
+      telegram.message(data)
+    elif local.get("callback_query"):
+      telegram.callback_query(data)
   else:
     print("Wrong request data!")
-    return "False"
+  return "True"
 
 if __name__ == "__main__":
   app.run(debug=True)
