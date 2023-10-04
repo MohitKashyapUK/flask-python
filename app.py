@@ -18,22 +18,11 @@ def handler_telegram():
   # Handling request
   import telegram
   data = request.get_json(force=True, silent=True)
-  log_url = base_url + "/Log.php"
-  def log(t):
-    requests.get(log_url, { "data": t }, stream=True)
-  log("App:")
-  log("Line 25: Handling request")
   if data:
-    log("Line 27: Handling data")
     if data.get("message"):
-      log("Line 29: Handling message")
-      try:
-        telegram.message(data)
-      except Exception as e:
-        log(str(e))
+      telegram.message(data)
   else:
     print("Wrong request data!")
-  log("App: finishing")
   return "True"
 
 if __name__ == "__main__":

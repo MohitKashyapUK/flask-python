@@ -1,15 +1,9 @@
 def message(data):
   from pytube import YouTube, extract
   import os, json, requests
-  def log(t):
-    requests.get("https://sk-results.000webhostapp.com/Log.php", { "data": t }, stream=True)
-  log("telegram: Message:")
-  log("Starting")
   Message = data["message"]
-  log("Message data: " + json.dumps(Message))
   message_id = Message["message_id"]
   chat_id = Message["from"]["id"]
-  log("chat_id: " + chat_id)
   text = Message["text"]
   bot_api = "https://api.telegram.org"
   bot_token = os.environ.get("bot_token")
@@ -21,7 +15,6 @@ def message(data):
     video_id = None
   url = f"{bot_api}/bot{bot_token}/{method}"
   if video_id:
-    log("yt handling")
     params["reply_markup"] = {
       "inline_keyboard": [
         [
@@ -40,8 +33,6 @@ def message(data):
         ]
       ]
     }
-    resp = requests.post(url, data=params)
-    log("41: " + resp.text)
+    requests.post(url, data=params)
   else:
-    resp = requests.post(url, data={ "chat_id": chat_id, "text": data })
-    log("44: " + resp.text)
+    requests.post(url, data={ "chat_id": chat_id, "text": data })
