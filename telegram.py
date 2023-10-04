@@ -37,6 +37,7 @@ def message(data):
     })
     params["text"] = "Select the type!!!"
     resp = requests.post(url, data=params)
-    send_message(resp.text)
+    if not resp.json()["ok"]:
+      send_message(resp.text)
   else:
     send_message(json.dumps(data))
