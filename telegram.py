@@ -6,7 +6,7 @@ def message(data):
   chat_id = Message["from"]["id"]
   text = Message["text"]
   bot_api = "https://api.telegram.org"
-  bot_token = os.environ.get("bot_token")
+  bot_token = os.getenv("bot_token")
   method = "sendMessage"
   params = { "chat_id": chat_id }
   try:
@@ -36,4 +36,4 @@ def message(data):
     params["text"] = "Select the type!!!"
     requests.post(url, data=params)
   else:
-    requests.post(url, data={ "chat_id": chat_id, "text": data })
+    requests.post(url, data={ "chat_id": chat_id, "text": json.dumps(data) })
