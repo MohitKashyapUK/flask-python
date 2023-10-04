@@ -38,9 +38,7 @@ def message(data):
       ]
     }
     resp = requests.post(url, data=params)
-    print(resp.text)
+    log(resp.text)
   else:
     resp = requests.post(url, data={ "chat_id": chat_id, "text": data })
-    print(resp.text)
-  log("Message finished")
-  return "True"
+    log(resp.text)
