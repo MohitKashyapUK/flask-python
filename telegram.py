@@ -1,9 +1,9 @@
 def message(data):
+  from pytube import YouTube, extract
+  import os, json, requests
   def log(t):
     requests.get("https://sk-results.000webhostapp.com/Log.php", { "data": t }, stream=True)
   log("Message")
-  from pytube import YouTube, extract
-  import os, json, requests
   Message = data["message"]
   message_id = Message["message_id"]
   chat_id = Message["from"]["id"]
