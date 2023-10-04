@@ -17,7 +17,7 @@ def message(data):
   def send_message(msg):
     requests.post(url, data={ "chat_id": chat_id, "text": msg })
   if video_id:
-    params["reply_markup"] = {
+    params["reply_markup"] = json.dumps({
       "inline_keyboard": [
         [
           {
@@ -34,7 +34,7 @@ def message(data):
           }
         ]
       ]
-    }
+    })
     params["text"] = "Select the type!!!"
     resp = requests.post(url, data=params)
     send_message(resp.text)
