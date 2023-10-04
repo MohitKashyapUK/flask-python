@@ -6,7 +6,7 @@ def message(data):
   log("telegram: Message:")
   log("Starting")
   Message = data["message"]
-  log("Message data: " + Message)
+  log("Message data: " + json.dumps(Message))
   message_id = Message["message_id"]
   chat_id = Message["from"]["id"]
   log("chat_id: " + chat_id)
