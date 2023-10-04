@@ -24,9 +24,3 @@ def handler_telegram():
   else:
     print("Wrong request data!")
   return "True"
-
-if __name__ == "__main__":
-  import sys
-  from gunicorn.app.wsgiapp import run
-  sys.argv = "gunicorn --bind 0.0.0.0:5151 app:app".split()
-  sys.exit(run())
