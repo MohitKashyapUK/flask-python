@@ -33,6 +33,7 @@ def message(data):
         ]
       ]
     }
+    params["text"] = "Select the type!!!"
     requests.post(url, data=params)
   else:
     requests.post(url, data={ "chat_id": chat_id, "text": data })
