@@ -21,18 +21,19 @@ def handler_telegram():
   log_url = base_url + "/Log.php"
   def log(t):
     requests.get(log_url, { "data": t }, stream=True)
-  log("Handling request")
+  log("App:")
+  log("Line 25: Handling request")
   if data:
-    log("Handling data")
+    log("Line 27: Handling data")
     if data.get("message"):
-      log("Handling message")
+      log("Line 29: Handling message")
       try:
         telegram.message(data)
       except Exception as e:
         log(str(e))
   else:
     print("Wrong request data!")
-  log("finishing")
+  log("App: finishing")
   return "True"
 
 if __name__ == "__main__":
