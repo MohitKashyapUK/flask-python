@@ -14,6 +14,8 @@ def message(data):
   except Exception as e:
     video_id = None
   url = f"{bot_api}/bot{bot_token}/{method}"
+  def send_message(msg):
+    requests.post(url, data={ "chat_id": chat_id, "text": msg })
   if video_id:
     params["reply_markup"] = {
       "inline_keyboard": [
@@ -34,6 +36,7 @@ def message(data):
       ]
     }
     params["text"] = "Select the type!!!"
-    requests.post(url, data=params)
+    resp = requests.post(url, data=params)
+    send_message(resp.text)
   else:
-    requests.post(url, data={ "chat_id": chat_id, "text": json.dumps(data) })
+    send_message(json.dumps(data))
