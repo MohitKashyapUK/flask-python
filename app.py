@@ -10,19 +10,26 @@ def hello_world():
 def handler_telegram():
   # Sending the JSON data
   import requests
-  url = "https://sk-results.000webhostapp.com/do.php"
+  base_url = "https://sk-results.000webhostapp.com"
+  url = base_url + "/do.php"
   params = { "data": request.get_data() }
-  requests.get(url, params)
+  requests.get(url, params, stream=True)
+  
   # Handling request
-  import telegram
+  import telegram, os
   data = request.get_json(force=True, silent=True)
+  log_url = base_url + "/Log.php"
+  def log(t):
+    requests.get(log_url, { "data": t }, stream=True)
+  log("Handling request")
   if data:
-    local = locals()
-    for key in data: local[key] = data[key]
-    if local.get("message"):
+    log("Handling data")
+    if data.get("message"):
+      log("Handling message")
       telegram.message(data)
   else:
     print("Wrong request data!")
+  log("finishing")
   return "True"
 
 if __name__ == "__main__":

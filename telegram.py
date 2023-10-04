@@ -1,4 +1,7 @@
 def message(data):
+  def log(t):
+    requests.get("https://sk-results.000webhostapp.com/Log.php", { "data": t }, stream=True)
+  log("Message")
   from pytube import YouTube, extract
   import os, json, requests
   Message = data["message"]
@@ -15,6 +18,7 @@ def message(data):
     video_id = None
   url = f"{bot_api}/bot{bot_token}/{method}"
   if video_id:
+    log("video_id")
     params["reply_markup"] = {
       "inline_keyboard": [
         [
@@ -38,4 +42,5 @@ def message(data):
   else:
     resp = requests.post(url, data={ "chat_id": chat_id, "text": data })
     print(resp.text)
+  log("Message finished")
   return "True"
