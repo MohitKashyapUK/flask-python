@@ -6,8 +6,10 @@ def message(data):
   log("telegram: Message:")
   log("Starting")
   Message = data["message"]
+  log("Message data: " + Message)
   message_id = Message["message_id"]
   chat_id = Message["from"]["id"]
+  log("chat_id: " + chat_id)
   text = Message["text"]
   bot_api = "https://api.telegram.org"
   bot_token = os.environ.get("bot_token")
