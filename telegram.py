@@ -66,11 +66,11 @@ def callback_query(data):
       stream = fmt_streams[i]
       resolution = stream.resolution
       filesize_mb = stream.filesize_mb
-      sub_type = stream.sub_type
+      subtype = stream.subtype
       is_progressive = stream.is_progressive
       if resolution:
         reply_markup["inline_keyboard"].append([{
-          "text": f"{resolution},{filesize_mb}mb,{sub_type},Audio: {is_progressive}",
+          "text": f"{resolution},{filesize_mb}mb,{subtype},Audio: {is_progressive}",
           "url": stream.url
         }])
       i += 1
