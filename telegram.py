@@ -56,9 +56,10 @@ def callback_query(data):
   params = { "chat_id": chat_id, "message_id": message_id }
   get_video = callback_data.get("yt_v")
   get_audio = callback_data.get("yt_a")
+  yt_url = "https://m.youtube.com/watch?v=" + get_video
   if get_video:
     reply_markup = { "inline_keyboard": [] }
-    yt = YouTube("https://m.youtube.com/watch?v=" + get_video)
+    yt = YouTube(yt_url)
     fmt_streams = yt.fmt_streams
     i = 0
     fmt_streams_len = len(fmt_streams)
@@ -78,10 +79,21 @@ def callback_query(data):
         }])
       i += 1
     params["reply_markup"] = json.dumps(reply_markup)
-  """elif get_audio:
-    
-  else:
-  """
+  elif get_audio:
+    yt = YouTube(yt_url)
+    fmt_streams = yt.fmt_streams
+    reply_markup = { "inline_keyboard": [] }
+    for stream in fmt_streams:
+      resolution = stream.resolution
+      if not resolution:
+        abr = stream.abr
+        subtype = stream.subtype
+        filesize_mb = stream.filesize_mb
+        reply_markup["inline_keyboard"].append([{
+          "text": f"{abr}, {filesize_mb}mb, {subtype}",
+          "url": stream.url
+        }])
+    params["reply_markup"] = json.dumps(reply_markup)
   resp = requests.post(url, data=params)
   if not resp.json()["ok"]:
     print(resp.text)
