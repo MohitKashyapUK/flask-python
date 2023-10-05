@@ -44,7 +44,7 @@ def message(data):
 
 def callback_query(data):
   from pytube import YouTube
-  import json, requests
+  import json, requests, os
   CallbackQuery = data["callback_query"]
   message_id = CallbackQuery["message"]["message_id"]
   chat_id = CallbackQuery["from"]["id"]
