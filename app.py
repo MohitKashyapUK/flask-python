@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.get("/")
 def hello_world():
-  return "<p>Hello, World!</p>"
+  return "<b>/bot-handler/telegram</b>"
 
 @app.route("/bot-handler/telegram", methods=["GET", "POST"])
 def handler_telegram():
@@ -21,6 +21,8 @@ def handler_telegram():
   if data:
     if data.get("message"):
       telegram.message(data)
+    elif data.get("callback_query"):
+      telegram.callback_query(data)
   else:
     print("Wrong request data!")
   return "True"

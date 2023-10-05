@@ -41,3 +41,44 @@ def message(data):
       send_message(resp.text)
   else:
     send_message(json.dumps(data))
+
+def callback_query(data):
+  from pytube import YouTube
+  import json, requests
+  CallbackQuery = data["callback_query"]
+  message_id = CallbackQuery["message"]["message_id"]
+  chat_id = CallbackQuery["from"]["id"]
+  callback_data = json.loads(CallbackQuery["data"])
+  bot_api = "https://api.telegram.org"
+  bot_token = os.getenv("bot_token")
+  method = "editMessageReplyMarkup"
+  url = f"{bot_api}/bot{bot_token}/{method}"
+  params = { "chat_id": chat_id }
+  get_video = callback_data.get("yt_v")
+  get_audio = callback_data.get("yt_a")
+  if get_video:
+    reply_markup = { "inline_keyboard": [] }
+    yt = YouTube(get_video)
+    fmt_streams = yt.fmt_streams
+    i = 0
+    fmt_streams_len = len(fmt_streams)
+    while i < fmt_streams_len:
+      stream = fmt_streams[i]
+      resolution = stream.resolution
+      filesize_mb = stream.filesize_mb
+      mime_type = stream.mime_type
+      is_progressive = stream.is_progressive
+      if resolution:
+        reply_markup["inline_keyboard"][i] = [{
+          "text": f"{resolution} {filesize_mb}mb {mime_type} Audio: {is_progressive}"
+          "url": stream.url
+        }]
+      i += 1
+    params["reply_markup"] = json.dumps(reply_markup)
+  """elif get_audio:
+    
+  else:
+  """
+  resp = requests.post(url, data=params)
+  if not resp.json()["ok"]:
+    print(resp.text)
