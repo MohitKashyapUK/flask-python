@@ -58,7 +58,7 @@ def callback_query(data):
   get_audio = callback_data.get("yt_a")
   if get_video:
     reply_markup = { "inline_keyboard": [] }
-    yt = YouTube(get_video)
+    yt = YouTube("https://m.youtube.com/watch?v=" + get_video)
     fmt_streams = yt.fmt_streams
     i = 0
     fmt_streams_len = len(fmt_streams)
