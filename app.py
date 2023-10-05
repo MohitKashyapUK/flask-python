@@ -1,4 +1,5 @@
 from flask import Flask, request
+from gunicorn.app.wsgiapp import WSGIApplication
 
 app = Flask(__name__)
 
@@ -26,3 +27,6 @@ def handler_telegram():
   else:
     print("Wrong request data!")
   return "True"
+  
+if __name__ == '__main__':
+  gunicorn.app.run(WSGIApplication(app))
