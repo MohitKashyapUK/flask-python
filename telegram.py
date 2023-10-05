@@ -53,7 +53,7 @@ def callback_query(data):
   bot_token = os.getenv("bot_token")
   method = "editMessageReplyMarkup"
   url = f"{bot_api}/bot{bot_token}/{method}"
-  params = { "chat_id": chat_id }
+  params = { "chat_id": chat_id, "message_id": message_id }
   get_video = callback_data.get("yt_v")
   get_audio = callback_data.get("yt_a")
   if get_video:
