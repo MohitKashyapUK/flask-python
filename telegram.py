@@ -56,7 +56,8 @@ def callback_query(data):
   params = { "chat_id": chat_id, "message_id": message_id }
   get_video = callback_data.get("yt_v")
   get_audio = callback_data.get("yt_a")
-  yt_url = "https://m.youtube.com/watch?v=" + get_video or get_audio
+  video_id = get_video or get_audio
+  yt_url = "https://m.youtube.com/watch?v=" + video_id
   if get_video:
     reply_markup = { "inline_keyboard": [] }
     yt = YouTube(yt_url)
