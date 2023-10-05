@@ -72,6 +72,9 @@ def callback_query(data):
         reply_markup["inline_keyboard"].append([{
           "text": f"{resolution}",
           "url": stream.url
+        }, {
+          "text": f"{resolution}",
+          "url": stream.url
         }])
       i += 1
     params["reply_markup"] = json.dumps(reply_markup)
