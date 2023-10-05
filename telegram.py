@@ -69,10 +69,10 @@ def callback_query(data):
       mime_type = stream.mime_type
       is_progressive = stream.is_progressive
       if resolution:
-        reply_markup["inline_keyboard"][i] = [{
+        reply_markup["inline_keyboard"].append([{
           "text": f"{resolution} {filesize_mb}mb {mime_type} Audio: {is_progressive}",
           "url": stream.url
-        }]
+        }])
       i += 1
     params["reply_markup"] = json.dumps(reply_markup)
   """elif get_audio:
