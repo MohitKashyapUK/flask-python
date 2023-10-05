@@ -28,10 +28,8 @@ def handler_telegram():
     print("Wrong request data!")
   return "True"
   
-def run_gunicorn():
-    gunicorn_app = WSGIApplication(app.wsgi_app, host="0.0.0.0", port=8000)
-    gunicorn_server = gunicorn.GunicornWSGIServer(gunicorn_app)
-    gunicorn_server.serve()
-
-if __name__ == "__main__":
-    run_gunicorn()
+import sys
+from gunicorn.app.wsgiapp import run
+if __name__ == '__main__':
+    sys.argv = "gunicorn --bind 0.0.0.0:5151 app:app".split()
+    sys.exit(run())
