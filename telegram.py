@@ -70,7 +70,7 @@ def callback_query(data):
       is_progressive = stream.is_progressive
       if resolution:
         reply_markup["inline_keyboard"][i] = [{
-          "text": f"{resolution} {filesize_mb}mb {mime_type} Audio: {is_progressive}"
+          "text": f"{resolution} {filesize_mb}mb {mime_type} Audio: {is_progressive}",
           "url": stream.url
         }]
       i += 1
