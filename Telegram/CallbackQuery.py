@@ -7,23 +7,17 @@ def callback_query(data):
   CallbackQuery = data["callback_query"]
   message_id = CallbackQuery["message"]["message_id"]
   chat_id = CallbackQuery["from"]["id"]
-  try:
-    callback_data = json.loads(CallbackQuery["data"])
-  except Exception as e:
-    callback_data = CallbackQuery["data"]
+  callback_data = json.loads(CallbackQuery["data"])
   bot_api = "https://api.telegram.org"
   bot_token = os.getenv("bot_token")
   method = "editMessageReplyMarkup"
   url = f"{bot_api}/bot{bot_token}/{method}"
   params = { "chat_id": chat_id, "message_id": message_id }
-  try:
-    get_video = callback_data.get("yt_v")
-    get_audio = callback_data.get("yt_a")
-  except Exception as e:
-    get_video = None
-    get_audio = None
+  get_video = callback_data.get("yt_v")
+  get_audio = callback_data.get("yt_a")
+  back = callback_data.get("back")
   is_audio_or_video = get_video or get_audio
-  video_id = is_audio_or_video or callback_data
+  video_id = is_audio_or_video or back
   yt_url = f"https://m.youtube.com/watch?v={video_id}"
   
   if is_audio_or_video:
@@ -44,11 +38,11 @@ def callback_query(data):
       reply_markup["inline_keyboard"].append([item])
     back_btn = {
       "text": "« Back",
-      "callback_data": video_id
+      "callback_data": json.dumps({ "back": video_id })
     }
     reply_markup["inline_keyboard"].append([back_btn])
-    reply_markup["text"] = f"Here are all the { 'video' if get_video else 'audio' }s!"
-  else: # Back
+    params["text"] = f"Here are all the { 'video' if get_video else 'audio' }s!"
+  elif back: # Back
     reply_markup = {
       "inline_keyboard": [
         [
@@ -66,5 +60,4 @@ def callback_query(data):
   
   params["reply_markup"] = json.dumps(reply_markup)
   resp = requests.post(url, data=params)
-  if not resp.json()["ok"]:
-    print(resp.text)
+  print(resp.text)
