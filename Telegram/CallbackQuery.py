@@ -35,6 +35,11 @@ def callback_query(data):
         "callback_data": itag
       }
       reply_markup["inline_keyboard"].append([item])
+    back_btn = {
+      "text": "« Back",
+      "callback_data": video_id
+    }
+    reply_markup["inline_keyboard"].append([back_btn])
     reply_markup["text"] = f"Here are all the { 'video' if get_video else 'audio' }s!"
   else: # Back
     reply_markup = {

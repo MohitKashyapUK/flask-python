@@ -17,7 +17,6 @@ def handler_telegram():
   requests.get(url, params, stream=True)
   
   from Telegram.Manager import manager
-  print(manager)
   manager(request.get_json(force=True, silent=True))
   return "True"
   
