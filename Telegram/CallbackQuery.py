@@ -19,7 +19,7 @@ def callback_query(data):
   is_audio_or_video = get_video or get_audio
   video_id = is_audio_or_video or back
   yt_url = f"https://m.youtube.com/watch?v={video_id}"
-  
+  print(yt_url)
   if is_audio_or_video:
     reply_markup = { "inline_keyboard": [] }
     yt = YouTube(yt_url)
