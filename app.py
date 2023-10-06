@@ -15,27 +15,13 @@ def handler_telegram():
   url = base_url + "/do.php"
   params = { "data": request.get_data() }
   requests.get(url, params, stream=True)
-  """
-  # Handling request
-  import telegram
-  data = request.get_json(force=True, silent=True)
-  if data:
-    urlForDataStore = "https://sk-results.000webhostapp.com/store.php"
-    params = {
-      "data": json.dumps
-    }
-    if data.get("message"):
-      # telegram.message(data)
-      requests.get(urlForDataStore, params)
-    elif data.get("callback_query"):
-      telegram.callback_query(data)
-  else:
-    print("Wrong request data!")
-  """
+  
+  from Telegram.Manager import manager
+  manager(request.json())
   return "True"
   
 import sys
 from gunicorn.app.wsgiapp import run
 if __name__ == '__main__':
-    sys.argv = "gunicorn --bind 0.0.0.0:5151 app:app".split()
-    sys.exit(run())
+  sys.argv = "gunicorn --bind 0.0.0.0:5151 app:app".split()
+  sys.exit(run())
