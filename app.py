@@ -18,7 +18,7 @@ def handler_telegram():
   
   from Telegram.Manager import manager
   print(manager)
-  manager(request.json())
+  manager(request.get_json(force=True, silent=True))
   return "True"
   
 import sys
