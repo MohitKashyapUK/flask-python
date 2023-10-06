@@ -16,8 +16,12 @@ def callback_query(data):
   method = "editMessageReplyMarkup"
   url = f"{bot_api}/bot{bot_token}/{method}"
   params = { "chat_id": chat_id, "message_id": message_id }
-  get_video = callback_data.get("yt_v")
-  get_audio = callback_data.get("yt_a")
+  if type(callback_data) == "dict":
+    get_video = callback_data.get("yt_v")
+    get_audio = callback_data.get("yt_a")
+  else:
+    get_video = None
+    get_audio = None
   is_audio_or_video = get_video or get_audio
   video_id = is_audio_or_video or callback_data
   yt_url = f"https://m.youtube.com/watch?v={video_id}"
