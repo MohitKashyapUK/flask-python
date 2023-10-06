@@ -1,5 +1,5 @@
-from Message import message
-from CallbackQuery import callback_query
+from Telegram.Message import message
+from Telegram.CallbackQuery import callback_query
 
 def manager(data):
   if "message" in data:
