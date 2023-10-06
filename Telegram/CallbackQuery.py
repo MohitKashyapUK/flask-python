@@ -16,10 +16,10 @@ def callback_query(data):
   method = "editMessageReplyMarkup"
   url = f"{bot_api}/bot{bot_token}/{method}"
   params = { "chat_id": chat_id, "message_id": message_id }
-  if type(callback_data) == "dict":
+  try:
     get_video = callback_data.get("yt_v")
     get_audio = callback_data.get("yt_a")
-  else:
+  except Exception as e:
     get_video = None
     get_audio = None
   is_audio_or_video = get_video or get_audio
@@ -39,7 +39,7 @@ def callback_query(data):
       itag = stream.itag
       item = {
         "text": f"{resolution}, {filesize_mb}mb, {subtype}",
-        "callback_data": itag
+        "callback_data": json.dumps({ "itag": itag, "id": video_id })
       }
       reply_markup["inline_keyboard"].append([item])
     back_btn = {
