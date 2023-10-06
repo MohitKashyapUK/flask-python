@@ -18,8 +18,8 @@ def callback_query(data):
   back = callback_data.get("back")
   is_audio_or_video = get_video or get_audio
   video_id = is_audio_or_video or back
-  yt_url = f"https://m.youtube.com/watch?v={video_id}"
-  print(yt_url)
+  yt_url = "https://www.youtube.com/watch?v=" + video_id
+  
   if is_audio_or_video:
     reply_markup = { "inline_keyboard": [] }
     yt = YouTube(yt_url)
@@ -60,4 +60,5 @@ def callback_query(data):
   
   params["reply_markup"] = json.dumps(reply_markup)
   resp = requests.post(url, data=params)
-  print(resp.text)
+  if not resp.json()["ok"]:
+    print(resp.text)
