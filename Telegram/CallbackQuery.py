@@ -7,7 +7,10 @@ def callback_query(data):
   CallbackQuery = data["callback_query"]
   message_id = CallbackQuery["message"]["message_id"]
   chat_id = CallbackQuery["from"]["id"]
-  callback_data = json.loads(CallbackQuery["data"])
+  try:
+    callback_data = json.loads(CallbackQuery["data"])
+  except Exception as e:
+    callback_data = CallbackQuery["data"]
   bot_api = "https://api.telegram.org"
   bot_token = os.getenv("bot_token")
   method = "editMessageReplyMarkup"
