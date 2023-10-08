@@ -1,19 +1,8 @@
 from pytube import extract
+from Telegram.Methods import send_message
 import os
 import json
 import requests
-
-def send_message(chat_id, text, reply_markup=None):
-  bot_api = "https://api.telegram.org"
-  bot_token = os.getenv("bot_token")
-  method = "sendMessage"
-  url = f"{bot_api}/bot{bot_token}/{method}"
-  params = { "chat_id": chat_id, "text": text }
-  if reply_markup:
-    params["reply_markup"] = json.dumps(reply_markup)
-  resp = requests.post(url, data=params)
-  if not resp.json()["ok"]:
-    print(resp.text)
 
 def message(data):
   Message = data["message"]

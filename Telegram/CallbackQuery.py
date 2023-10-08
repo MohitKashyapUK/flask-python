@@ -1,24 +1,8 @@
 from pytube import YouTube
+from Telegram.Methods import editMessageText
 import json
 import os
 import requests
-
-def editMessageText(chat_id, message_id, text, reply_markup):
-  bot_api = "https://api.telegram.org"
-  bot_token = os.getenv("bot_token")
-  method = "editMessageText"
-  url = f"{bot_api}/bot{bot_token}/{method}"
-  params = {
-    "chat_id": chat_id,
-    "message_id": message_id,
-    "text": text,
-    "reply_markup": json.dumps(reply_markup)
-  }
-  resp = requests.post(url, data=params)
-  if not resp.json()["ok"]:
-    print(resp.text)
-    return False
-  return True
 
 def callback_query(data):
   CallbackQuery = data["callback_query"]
