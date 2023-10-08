@@ -7,11 +7,11 @@ app = Flask(__name__)
 def hello_world():
   return "<b>/bot-handler/telegram</b>"
 
-@app.get("/file")
-def file():
-  with open("output", "w") as f:
-    f.write("hello")
-  with open("output", "r") as f:
+@app.get("/f")
+def f():
+  with open("gg", "w") as f:
+    f.write("helo")
+  with open("gg", "r") as f:
     return f.read()
 
 @app.route("/bot-handler/telegram", methods=["GET", "POST"])
