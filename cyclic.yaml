@@ -1,8 +1,0 @@
-scripts:
-  - name: Install FFmpeg
-    script: |
-      # Update the package list
-      apt-get update
-      
-      # Install FFmpeg
-      apt-get install ffmpeg -y
