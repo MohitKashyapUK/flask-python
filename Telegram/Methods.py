@@ -1,3 +1,5 @@
+import os, json, requests
+
 bot_api = "https://api.telegram.org"
 bot_token = os.getenv("bot_token")
 url = f"{bot_api}/bot{bot_token}/"
