@@ -7,6 +7,12 @@ app = Flask(__name__)
 def hello_world():
   return "<b>/bot-handler/telegram</b>"
 
+@app.get("/ffmpeg")
+def ffmpeg():
+  import ffmpeg
+  print(ffmpeg)
+  return "Done"
+
 @app.route("/bot-handler/telegram", methods=["GET", "POST"])
 def handler_telegram():
   # Sending the JSON data
