@@ -6,11 +6,7 @@ url = f"{bot_api}/bot{bot_token}/"
 
 def editMessageText(chat_id, message_id, text, reply_markup=None):
   method = "editMessageText"
-  params = {
-    "chat_id": chat_id,
-    "message_id": message_id,
-    "text": text
-  }
+  params = { "chat_id": chat_id, "message_id": message_id, "text": text }
   if reply_markup:
     params["reply_markup"] = json.dumps(reply_markup)
   resp = requests.post(url + method, data=params)

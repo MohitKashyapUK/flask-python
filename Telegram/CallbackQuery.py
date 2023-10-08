@@ -1,8 +1,6 @@
 from pytube import YouTube
 from Telegram.Methods import editMessageText
-import json
-import os
-import requests
+import os, json, requests
 
 def callback_query(data):
   CallbackQuery = data["callback_query"]
