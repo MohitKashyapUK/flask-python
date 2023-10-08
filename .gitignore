@@ -1,6 +1,7 @@
 demo.py
 yt.py
 push.sh
+cyclic.*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
