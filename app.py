@@ -7,11 +7,12 @@ app = Flask(__name__)
 def hello_world():
   return "<b>/bot-handler/telegram</b>"
 
-@app.get("/ffmpeg")
-def ffmpeg():
-  import ffmpeg
-  print(ffmpeg)
-  return "Done"
+@app.get("/file")
+def file():
+  with open("output", "w") as f:
+    f.write("hello")
+  with open("output", "r") as f:
+    return f.read()
 
 @app.route("/bot-handler/telegram", methods=["GET", "POST"])
 def handler_telegram():
